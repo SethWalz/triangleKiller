@@ -1,3 +1,10 @@
+import java.util.BitSet;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+
 public class Input {
 
     /**
@@ -78,7 +85,7 @@ public class Input {
     }
 
     public boolean isMoveLeft() {
-        return keyboardBitSet.get( leftKey.ordinal()) && !keyboardBitSet.get( rightKey.ordinal());  
+        return keyboardBitSet.get( leftKey.ordinal()) && !keyboardBitSet.get( rightKey.ordinal());
     }
 
     public boolean isMoveRight() {

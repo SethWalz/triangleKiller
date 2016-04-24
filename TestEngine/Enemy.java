@@ -1,3 +1,6 @@
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
 public class Enemy extends SpriteBase {
 
     public Enemy(Pane layer, Image image, double x, double y, double r, double dx, double dy, double dr, double health, double damage) {

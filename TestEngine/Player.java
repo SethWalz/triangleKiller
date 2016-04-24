@@ -1,3 +1,7 @@
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+
+
 public class Player extends SpriteBase {
 
     double playerShipMinX;
@@ -23,7 +27,7 @@ public class Player extends SpriteBase {
     private void init() {
 
         // calculate movement bounds of the player ship
-        // allow half of the ship to be outside of the screen 
+        // allow half of the ship to be outside of the screen
         playerShipMinX = 0 - image.getWidth() / 2.0;
         playerShipMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
         playerShipMinY = 0 - image.getHeight() / 2.0;
