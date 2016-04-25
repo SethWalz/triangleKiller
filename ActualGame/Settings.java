@@ -1,7 +1,7 @@
 public class Settings {
 
-    public static double SCENE_WIDTH = 1280;
-    public static double SCENE_HEIGHT = 1024;
+    public static double SCENE_WIDTH = 400;
+    public static double SCENE_HEIGHT = 800;
 
     public static double PLAYER_SHIP_SPEED = 4.0;
     public static double PLAYER_SHIP_HEALTH = 100.0;

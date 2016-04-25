@@ -143,6 +143,7 @@ public class Game extends Application {
             return;
         }
 
+
         // image
         Image image = enemyImage;
 

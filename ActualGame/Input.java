@@ -12,12 +12,17 @@ public class Input {
      */
     private BitSet keyboardBitSet = new BitSet();
 
-	//Setting inputs
-    private KeyCode upKey = KeyCode.W;
-    private KeyCode downKey = KeyCode.S;
-    private KeyCode leftKey = KeyCode.A;
-    private KeyCode rightKey = KeyCode.D;
+    // -------------------------------------------------
+    // default key codes
+    // will vary when you let the user customize the key codes or when you add support for a 2nd player
+    // -------------------------------------------------
+
+    private KeyCode upKey = KeyCode.UP;
+    private KeyCode downKey = KeyCode.DOWN;
+    private KeyCode leftKey = KeyCode.LEFT;
+    private KeyCode rightKey = KeyCode.RIGHT;
     private KeyCode primaryWeaponKey = KeyCode.SPACE;
+    private KeyCode secondaryWeaponKey = KeyCode.CONTROL;
 
     Scene scene;
 
@@ -89,6 +94,10 @@ public class Input {
 
     public boolean isFirePrimaryWeapon() {
         return keyboardBitSet.get( primaryWeaponKey.ordinal());
+    }
+
+    public boolean isFireSecondaryWeapon() {
+        return keyboardBitSet.get( secondaryWeaponKey.ordinal());
     }
 
 }

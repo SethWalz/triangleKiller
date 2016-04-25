@@ -1,11 +1,9 @@
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Rotate;
 
 public class Enemy extends SpriteBase {
 
     public Enemy(Pane layer, Image image, double x, double y, double r, double dx, double dy, double dr, double health, double damage) {
-
         super(layer, image, x, y, r, dx, dy, dr, health, damage);
     }
 
