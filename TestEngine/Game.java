@@ -86,6 +86,8 @@ public class Game extends Application {
             }
 
         };
+
+
         gameLoop.start();
 
     }

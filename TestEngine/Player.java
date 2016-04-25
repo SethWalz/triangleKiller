@@ -58,6 +58,11 @@ public class Player extends SpriteBase {
             dx = 0d;
         }
 
+        if(input.isFirePrimaryWeapon()) {
+
+
+		}
+
     }
 
     @Override

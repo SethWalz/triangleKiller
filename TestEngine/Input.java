@@ -68,7 +68,6 @@ public class Input {
 
     // -------------------------------------------------
     // Evaluate bitset of pressed keys and return the player input.
-    // If direction and its opposite direction are pressed simultaneously, then the direction isn't handled.
     // -------------------------------------------------
 
     public boolean isMoveUp() {
