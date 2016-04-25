@@ -1,6 +1,7 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import java.util.*;
 
 
 public abstract class SpriteBase {
@@ -186,7 +187,18 @@ public abstract class SpriteBase {
     // TODO: per-pixel-collision
     public boolean collidesWith( SpriteBase otherSprite) {
 
-        return ( otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
+		if(otherSprite.x + otherSprite.w >= x &&
+		   otherSprite.y + otherSprite.h >= y &&
+		   otherSprite.x <= x + w &&
+		   otherSprite.y <= y + h){
+
+			//if(y*.5 + .25*w > otherSprite.x){
+				return true;
+			//}
+
+		}
+
+		return false;
 
     }
 
