@@ -1,9 +1,10 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import java.util.*;
 
 
-public abstract class SpriteBase {
+public abstract class LazorBase {
 
     Image image;
     ImageView imageView;
@@ -28,7 +29,7 @@ public abstract class SpriteBase {
 
     boolean canMove = true;
 
-    public SpriteBase(Pane layer, Image image, double x, double y, double r, double dx, double dy, double dr, double health, double damage) {
+    public LazorBase(Pane layer, Image image, double x, double y, double r, double dx, double dy, double dr, double health, double damage) {
 
         this.layer = layer;
         this.image = image;
@@ -186,7 +187,16 @@ public abstract class SpriteBase {
     // TODO: per-pixel-collision
     public boolean collidesWith( SpriteBase otherSprite) {
 
-        return ( otherSprite.x + otherSprite.w >= x && otherSprite.y + otherSprite.h >= y && otherSprite.x <= x + w && otherSprite.y <= y + h);
+		if(otherSprite.x + otherSprite.w >= x &&
+		   otherSprite.y + otherSprite.h >= y &&
+		   otherSprite.x <= x + w &&
+		   otherSprite.y <= y + h){
+
+			return true;
+
+		}
+
+		return false;
 
     }
 

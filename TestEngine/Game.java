@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -12,19 +11,27 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 public class Game extends Application {
 
     Random rnd = new Random();
 
-    Pane playfieldLayer;
+    static Pane playfieldLayer;
     Pane scoreLayer;
 
-    Image playerImage;
+    int s;
+	Label score = new Label("Score: 0");
+
+	static Player player;
+	static Lazor lazor;
+    static Image playerImage;
     Image enemyImage;
+    static Image lazorImage;
 
     List<Player> players = new ArrayList<>();
     List<Enemy> enemies = new ArrayList<>();
+    static List<Lazor> lazorList = new ArrayList<>();
 
     Text collisionText = new Text();
     boolean collision = false;
@@ -40,8 +47,10 @@ public class Game extends Application {
         playfieldLayer = new Pane();
         scoreLayer = new Pane();
 
+
+
         root.getChildren().add( playfieldLayer);
-        root.getChildren().add( scoreLayer);
+        root.getChildren().addAll( scoreLayer,score);
 
         scene = new Scene( root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 
@@ -67,6 +76,7 @@ public class Game extends Application {
                 // movement
                 players.forEach(sprite -> sprite.move());
                 enemies.forEach(sprite -> sprite.move());
+				lazorList.forEach(sprite -> sprite.move());
 
                 // check collisions
                 checkCollisions();
@@ -74,6 +84,7 @@ public class Game extends Application {
                 // update sprites in scene
                 players.forEach(sprite -> sprite.updateUI());
                 enemies.forEach(sprite -> sprite.updateUI());
+                lazorList.forEach(sprite -> sprite.updateUI());
 
                 // check if sprite can be removed
                 enemies.forEach(sprite -> sprite.checkRemovability());
@@ -95,6 +106,7 @@ public class Game extends Application {
     private void loadGame() {
         playerImage = new Image( getClass().getResource("userTriangle.png").toExternalForm());
         enemyImage = new Image( getClass().getResource("enemyTriangle.png").toExternalForm());
+        lazorImage = new Image( getClass().getResource("Lazor.png").toExternalForm());
     }
 
     private void createScoreLayer() {
@@ -132,7 +144,7 @@ public class Game extends Application {
         double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        Player player = new Player(playfieldLayer, image, x, y, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
+        player = new Player(playfieldLayer, image, x, y, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         // register player
         players.add( player);
@@ -159,9 +171,8 @@ public class Game extends Application {
 
         // create a sprite
         Enemy enemy = new Enemy( playfieldLayer, image, x, y, 0, 0, speed, 0, 1,1);
-
         // manage sprite
-        enemies.add( enemy);
+        enemies.add(enemy);
 
     }
 
@@ -187,9 +198,24 @@ public class Game extends Application {
 
         for( Player player: players) {
             for( Enemy enemy: enemies) {
-                if( player.collidesWith(enemy)) {
-                    collision = true;
-                }
+
+            	try{
+            		if( lazor.collidesWith(enemy)) {
+            	        collision = true;
+            	        s++;
+            	        score.setText("Score: " + s);
+            	        enemy.remove();
+            	        lazor.remove();
+            	    }
+				}catch(Exception e){}
+
+				if( player.collidesWith(enemy)) {
+				   collision = true;
+					s=0;
+           	        score.setText("Score: " + s);
+           	        enemy.remove();
+            	}
+
             }
         }
     }
@@ -205,5 +231,16 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static void fireLazor(){
+	    double x = player.getX() + playerImage.getWidth()/2 - 4;
+	    double y = player.getY();
+
+  		double speed = 8; //rnd.nextDouble() * 9.0 + 10.0;
+
+        lazor = new Lazor(playfieldLayer, lazorImage, x, y, 0, 0, -speed, 0, 1,1);
+
+		lazorList.add(lazor);
+	}
 
 }

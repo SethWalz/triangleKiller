@@ -59,7 +59,9 @@ public class Player extends SpriteBase {
         }
 
         if(input.isFirePrimaryWeapon()) {
+			System.out.println("David > Seth");
 
+			Game.fireLazor();
 
 		}
 

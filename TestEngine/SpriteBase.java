@@ -144,7 +144,7 @@ public abstract class SpriteBase {
 
     public void move() {
 
-        if( !canMove)
+        if(!canMove)
             return;
 
         x += dx;
@@ -192,9 +192,7 @@ public abstract class SpriteBase {
 		   otherSprite.x <= x + w &&
 		   otherSprite.y <= y + h){
 
-			//if(y*.5 + .25*w > otherSprite.x){
-				return true;
-			//}
+			return true;
 
 		}
 

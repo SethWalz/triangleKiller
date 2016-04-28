@@ -1,7 +1,7 @@
 import java.util.BitSet;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.*;
 import javafx.scene.input.KeyEvent;
 
 
@@ -18,6 +18,7 @@ public class Input {
     private KeyCode leftKey = KeyCode.A;
     private KeyCode rightKey = KeyCode.D;
     private KeyCode primaryWeaponKey = KeyCode.SPACE;
+	boolean fire = false;
 
     Scene scene;
 
@@ -32,12 +33,6 @@ public class Input {
 
     }
 
-    public void removeListeners() {
-
-        scene.removeEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);
-        scene.removeEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
-
-    }
 
     /**
      * "Key Pressed" handler for all input events: register pressed key in the bitset
@@ -45,6 +40,12 @@ public class Input {
     private EventHandler<KeyEvent> keyPressedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
+
+			if(event.getCode() == KeyCode.SPACE){
+			//	System.out.println(event);
+				fire = true;
+				isFirePrimaryWeapon();
+			}
 
             // register key down
             keyboardBitSet.set(event.getCode().ordinal(), true);
@@ -59,12 +60,17 @@ public class Input {
         @Override
         public void handle(KeyEvent event) {
 
+			if(event.getCode() == KeyCode.SPACE){
+			//	System.out.println(event);
+				fire = false;
+				isFirePrimaryWeapon();
+			}
+
             // register key up
             keyboardBitSet.set(event.getCode().ordinal(), false);
 
         }
     };
-
 
     // -------------------------------------------------
     // Evaluate bitset of pressed keys and return the player input.
@@ -87,7 +93,7 @@ public class Input {
     }
 
     public boolean isFirePrimaryWeapon() {
-        return keyboardBitSet.get( primaryWeaponKey.ordinal());
+        return fire;
     }
 
 }
